@@ -1,413 +1,738 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tippanna Bangi | Creative Portfolio</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Inter Font from Google Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap">
+    <title>TippannaOS Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
     <style>
-        /* General styling for the body and fonts */
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #F8FAFC; /* Light gray background */
-            color: #1F2937; /* Dark text */
+        /* Global Styles */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Press Start 2P', monospace;
+            color: #FFF;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow: hidden;
+            user-select: none;
         }
-        /* Custom scrollbar for a cleaner look */
-        ::-webkit-scrollbar {
-            width: 8px;
+        a {
+            color: #4CAF50;
+            text-decoration: none;
         }
-        ::-webkit-scrollbar-track {
-            background: #E5E7EB; /* Lighter gray */
+        a:hover {
+            text-decoration: underline;
         }
-        ::-webkit-scrollbar-thumb {
-            background: #9CA3AF; /* Gray-400 */
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #06B6D4; /* Cyan-500 accent */
-        }
-        /* A custom class for the animated underline on section titles */
-        .section-title {
-            position: relative;
-            display: inline-block;
-        }
-        .section-title::after {
-            content: '';
-            position: absolute;
+        /* BootScreen.css */
+        .bootContainer {
+            position: fixed;
+            top: 0;
             left: 0;
-            bottom: -8px;
-            width: 75%;
-            height: 4px;
-            background: #06B6D4; /* Cyan-500 accent */
-            border-radius: 9999px;
-            transition: all 0.3s ease-in-out;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            color: #0F0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: monospace;
+            font-size: 1.25rem;
+            line-height: 1.5;
+            z-index: 999;
         }
-        /* Fade-in effect for sections */
-        .fade-in-section {
+        .bootText p {
+            margin: 0;
+            animation: fadeIn 1s ease-in-out forwards;
             opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
-        .fade-in-section.is-visible {
+        .bootText p:nth-child(1) { animation-delay: 0.5s; }
+        .bootText p:nth-child(2) { animation-delay: 1.5s; }
+        .bootText p:nth-child(3) { animation-delay: 2.5s; }
+        .bootText p:nth-child(4) { animation-delay: 3.5s; }
+        .cursor {
+            display: inline-block;
+            animation: blink 1s step-end infinite;
             opacity: 1;
-            transform: translateY(0);
+            font-size: 1.5rem;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+        /* Desktop.css */
+        .desktop {
+            width: 100vw;
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+            position: relative;
+            transition: background-image 0.5s ease-in-out;
+        }
+        .desktop.darkTheme {
+            background-image: url('https://i.ibb.co/6y4xM2D/wallpaper-dark.jpg');
+            cursor: url('https://i.ibb.co/4s5G2Jk/cursor-dark.png'), auto;
+        }
+        .desktop.lightTheme {
+            background-image: url('https://i.ibb.co/hV723zT/wallpaper-light.jpg');
+            cursor: url('https://i.ibb.co/D8G3w5g/cursor-light.png'), auto;
+        }
+        .iconsContainer {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .windowText {
+            margin-bottom: 1rem;
+        }
+        .windowSubTitle {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        .projectItem {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            color: black;
+        }
+        .projectItem h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        @media (max-width: 768px) {
+            .iconsContainer {
+                top: 1rem;
+                left: 1rem;
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+        }
+        /* Icon.css */
+        .icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            text-align: center;
+            width: 80px;
+            user-select: none;
+            transition: transform 0.2s ease-in-out;
+        }
+        .icon:hover {
+            transform: translateY(-5px);
+        }
+        .iconImage {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 0.5rem;
+        }
+        .iconName {
+            font-size: 0.8rem;
+            text-shadow: 1px 1px 2px #000;
+        }
+        @media (max-width: 768px) {
+            .icon {
+                width: 70px;
+            }
+            .iconImage {
+                width: 40px;
+                height: 40px;
+            }
+            .iconName {
+                font-size: 0.7rem;
+            }
+        }
+        /* Taskbar.css */
+        .taskbar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            padding: 0 1rem;
+            box-sizing: border-box;
+            border-top: 2px solid #444;
+        }
+        .startMenu {
+            margin-right: 1rem;
+        }
+        .startButton {
+            background-color: #333;
+            color: #FFF;
+            border: 2px outset #777;
+            padding: 0.25rem 0.75rem;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        .windowList {
+            display: flex;
+            flex-grow: 1;
+            gap: 0.5rem;
+            overflow-x: auto;
+        }
+        .taskbarItem {
+            background-color: #555;
+            color: #FFF;
+            border: 2px outset #999;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.8rem;
+            cursor: pointer;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 150px;
+        }
+        .taskbarItem.minimized {
+            border-style: inset;
+            background-color: #333;
+        }
+        .systemTray {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .time {
+            font-size: 0.8rem;
+            background-color: #333;
+            padding: 0.25rem 0.5rem;
+            border: 2px inset #777;
+        }
+        .themeToggle {
+            background-color: #333;
+            color: #FFF;
+            border: 2px outset #777;
+            padding: 0.25rem 0.75rem;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        @media (max-width: 768px) {
+            .taskbar {
+                padding: 0 0.5rem;
+            }
+            .startMenu {
+                margin-right: 0.5rem;
+            }
+            .startButton {
+                padding: 0.2rem 0.5rem;
+            }
+            .windowList {
+                gap: 0.25rem;
+            }
+            .taskbarItem {
+                padding: 0.2rem 0.4rem;
+                font-size: 0.7rem;
+            }
+            .time {
+                font-size: 0.7rem;
+            }
+        }
+        /* Terminal.css */
+        .terminalContainer {
+            background-color: #111;
+            color: #0F0;
+            padding: 1rem;
+            border: 2px solid #0F0;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+        .output {
+            flex-grow: 1;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-break: break-all;
+            margin: 0;
+            padding: 0;
+        }
+        .output span {
+            display: block;
+        }
+        .inputLine {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            margin-top: 1rem;
+        }
+        .input {
+            flex-grow: 1;
+            background: transparent;
+            border: none;
+            color: #0F0;
+            font-family: inherit;
+            font-size: inherit;
+            outline: none;
+        }
+        /* Window.css */
+        .window {
+            position: absolute;
+            min-width: 300px;
+            min-height: 200px;
+            background-color: #CCC;
+            border: 2px solid #000;
+            box-shadow: 5px 5px 0 #000;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            transform: scale(1);
+            opacity: 1;
+        }
+        .window.minimized {
+            transform: scale(0);
+            opacity: 0;
+            visibility: hidden;
+        }
+        .window.maximized {
+            top: 0 !important;
+            left: 0 !important;
+            width: 100vw !important;
+            height: calc(100vh - 40px) !important;
+            transform: none;
+            transition: width 0.3s, height 0.3s;
+        }
+        .windowHeader {
+            background-color: #000080;
+            color: #FFF;
+            padding: 0.25rem 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: grab;
+            user-select: none;
+            border-bottom: 2px solid #000;
+        }
+        .windowTitle {
+            font-weight: bold;
+        }
+        .windowControls {
+            display: flex;
+            gap: 0.25rem;
+        }
+        .windowControls button {
+            background-color: #C0C0C0;
+            color: #000;
+            border: 2px outset #FFF;
+            padding: 0 0.5rem;
+            font-size: 1rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+        .windowContent {
+            background-color: #FFF;
+            color: #000;
+            padding: 1rem;
+            flex-grow: 1;
+            overflow-y: auto;
+            font-size: 0.9rem;
+        }
+        .window, .windowControls button {
+            border-radius: 0;
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-900 antialiased">
+<body>
 
-    <!-- Header & Navigation -->
-    <header id="main-header" class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md shadow-lg transition-all duration-300 ease-in-out">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-3xl font-black text-cyan-500">Tippanna Bangi</a>
-            <div class="hidden md:flex space-x-8 font-medium">
-                <a href="#about" class="text-gray-600 hover:text-cyan-500 transition-colors">About</a>
-                <a href="#skills" class="text-gray-600 hover:text-cyan-500 transition-colors">Skills</a>
-                <a href="#projects" class="text-gray-600 hover:text-cyan-500 transition-colors">Projects</a>
-                <a href="#experience" class="text-gray-600 hover:text-cyan-500 transition-colors">Experience</a>
-                <a href="#certifications" class="text-gray-600 hover:text-cyan-500 transition-colors">Certifications</a>
-                <a href="#contact" class="text-gray-600 hover:text-cyan-500 transition-colors">Contact</a>
-            </div>
-            <!-- Mobile Menu Button -->
-            <button id="mobile-menu-button" class="md:hidden text-gray-600 hover:text-cyan-500 focus:outline-none">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                </svg>
-            </button>
-        </nav>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white/90 shadow-sm">
-            <a href="#about" class="block px-6 py-3 text-gray-600 hover:bg-gray-100">About</a>
-            <a href="#skills" class="block px-6 py-3 text-gray-600 hover:bg-gray-100">Skills</a>
-            <a href="#projects" class="block px-6 py-3 text-gray-600 hover:bg-gray-100">Projects</a>
-            <a href="#experience" class="block px-6 py-3 text-gray-600 hover:bg-gray-100">Experience</a>
-            <a href="#certifications" class="block px-6 py-3 text-gray-600 hover:bg-gray-100">Certifications</a>
-            <a href="#contact" class="block px-6 py-3 text-gray-600 hover:bg-gray-100">Contact</a>
-        </div>
-    </header>
+<div id="root"></div>
 
-    <main class="space-y-32 py-16">
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="https://unpkg.com/react-draggable@4.4.6/build/web/react-draggable.min.js"></script>
+<script type="text/babel">
+// All JSX code goes here, so Babel can transpile it in the browser.
 
-        <!-- Hero Section -->
-        <section id="hero" class="container mx-auto px-6 md:px-12 mt-20 fade-in-section">
-            <div class="grid lg:grid-cols-2 items-center gap-12 md:gap-24">
-                <div class="order-2 lg:order-1 text-center lg:text-left">
-                    <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 leading-tight">
-                        <span class="text-cyan-500">Hello,</span> I'm <br class="hidden md:inline"> Tippanna Bangi
-                    </h1>
-                    <p class="mt-6 text-lg md:text-xl text-gray-700 leading-relaxed max-w-xl">
-                        A motivated and tech-savvy graduate with a passion for technology and automation. I'm skilled in communication and proactive problem-solving.
-                    </p>
-                    <div class="mt-8 flex justify-center lg:justify-start space-x-4">
-                        <a href="#contact" class="bg-cyan-500 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-cyan-600 transition-colors duration-300 transform hover:scale-105">
-                            Get In Touch
-                        </a>
-                        <a href="#projects" class="bg-white text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg border border-gray-300 hover:bg-gray-100 transition-colors duration-300 transform hover:scale-105">
-                            View Work
-                        </a>
-                    </div>
-                </div>
-                <div class="order-1 lg:order-2 flex justify-center lg:justify-end">
-                    <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-cyan-500 shadow-2xl">
-                        <img src="https://i.ibb.co/pvwhFQcK/IMG-20250808-012023.png"
-                             alt="Tippanna Bangi"
-                             class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-                             onerror="this.onerror=null;this.src='https://placehold.co/320x320/F8FAFC/1F2937?text=Tippanna';">
-                    </div>
-                </div>
-            </div>
-        </section>
+const { useState, useEffect, useRef, useCallback } = React;
+const { DraggableCore } = ReactDraggable;
 
-        <!-- About Me Section -->
-        <section id="about" class="container mx-auto px-6 md:px-12 py-16 bg-white rounded-3xl shadow-xl fade-in-section">
-            <h2 class="text-4xl md:text-5xl font-bold text-center section-title mx-auto pb-4">About Me</h2>
-            <div class="mt-12 text-center text-lg max-w-4xl mx-auto text-gray-700">
-                <p class="mb-4">
-                    I am a tech-savvy graduate with a passion for technology, automation, and continuous learning. With nearly three years of experience as a Customer Associate at SquadStack, I have honed my skills in customer interaction, communication, and data handling.
-                </p>
-                <p>
-                    I am currently a trainee at Deshpande Skilling, where I'm further developing my technical and professional skills in areas like business communication, reasoning, aptitude, and technology. I am recognized for my adaptability, strong interpersonal skills, and a proactive approach to problem-solving.
-                </p>
-            </div>
-        </section>
-
-        <!-- Core Skills Section -->
-        <section id="skills" class="container mx-auto px-6 md:px-12 fade-in-section">
-            <h2 class="text-4xl md:text-5xl font-bold text-center section-title mx-auto pb-4">Core Skills</h2>
-            <div class="mt-12 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
-                <!-- Skill Card -->
-                <div class="bg-white p-6 rounded-2xl shadow-lg text-center flex flex-col items-center justify-center space-y-3 transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:bg-gray-100 group">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users-2 text-cyan-500 transition-colors duration-300 group-hover:text-gray-900"><path d="M14 19a6 6 0 0 0-12 0"/><circle cx="8" cy="9" r="4"/><path d="M22 19a6 6 0 0 0-6-6h-2c-.5 0-1 .2-1.4.6"/><circle cx="16" cy="9" r="4"/></svg>
-                    <h3 class="text-xl font-semibold text-gray-900">Customer Orientation</h3>
-                </div>
-                <!-- Skill Card -->
-                <div class="bg-white p-6 rounded-2xl shadow-lg text-center flex flex-col items-center justify-center space-y-3 transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:bg-gray-100 group">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-messages-square text-cyan-500 transition-colors duration-300 group-hover:text-gray-900"><path d="M14 2H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"/><path d="M8 12h8"/><path d="M8 8h6"/><path d="M8 16h8"/><path d="M22 2H10a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"/></svg>
-                    <h3 class="text-xl font-semibold text-gray-900">Communication Skills</h3>
-                </div>
-                <!-- Skill Card -->
-                <div class="bg-white p-6 rounded-2xl shadow-lg text-center flex flex-col items-center justify-center space-y-3 transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:bg-gray-100 group">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lightbulb-off text-cyan-500 transition-colors duration-300 group-hover:text-gray-900"><path d="M21 21-8-8"/><path d="M15.4 15.4c-.6.4-1.3.6-2.4.6-2 0-3.7-1.1-4.6-2.5a5.5 5.5 0 0 1-1.3-4c0-1.7.5-3 1.2-4C10.7 3.3 12 2 15 2c.6 0 1.2.1 1.6.2"/><path d="M9 18h6"/><path d="M10 22h4"/><path d="M16 14c-.2-1-.7-1.7-1.5-2.5"/></svg>
-                    <h3 class="text-xl font-semibold text-gray-900">Problem Solving</h3>
-                </div>
-                <!-- Skill Card -->
-                <div class="bg-white p-6 rounded-2xl shadow-lg text-center flex flex-col items-center justify-center space-y-3 transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:bg-gray-100 group">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-award text-cyan-500 transition-colors duration-300 group-hover:text-gray-900"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
-                    <h3 class="text-xl font-semibold text-gray-900">Result-Oriented</h3>
-                </div>
-                <!-- Skill Card -->
-                <div class="bg-white p-6 rounded-2xl shadow-lg text-center flex flex-col items-center justify-center space-y-3 transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:bg-gray-100 group">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-code-square text-cyan-500 transition-colors duration-300 group-hover:text-gray-900"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="m10 10-2 2 2 2"/><path d="m14 14 2-2-2-2"/></svg>
-                    <h3 class="text-xl font-semibold text-gray-900">Python & SQL</h3>
-                </div>
-                <!-- Skill Card -->
-                <div class="bg-white p-6 rounded-2xl shadow-lg text-center flex flex-col items-center justify-center space-y-3 transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:bg-gray-100 group">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-box-select text-cyan-500 transition-colors duration-300 group-hover:text-gray-900"><path d="M5 3a2 2 0 0 0-2 2v2"/><path d="M3 17a2 2 0 0 0 2 2h2"/><path d="M17 21a2 2 0 0 0 2-2v-2"/><path d="M21 7a2 2 0 0 0-2-2h-2"/><rect width="7" height="7" x="8.5" y="8.5" rx="1"/></svg>
-                    <h3 class="text-xl font-semibold text-gray-900">AI & Automation</h3>
-                </div>
-                <!-- Skill Card -->
-                <div class="bg-white p-6 rounded-2xl shadow-lg text-center flex flex-col items-center justify-center space-y-3 transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:bg-gray-100 group">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-library text-cyan-500 transition-colors duration-300 group-hover:text-gray-900"><path d="m16 6 4 14"/><path d="M12 6v14"/><path d="M8 8v12"/><path d="M4 4v16"/><path d="M20 2v20"/><path d="M12 2v20"/><path d="M20 2v20"/><rect width="20" height="20" x="2" y="2" rx="2"/></svg>
-                    <h3 class="text-xl font-semibold text-gray-900">MS Office & Google Workspace</h3>
-                </div>
-                <!-- Skill Card -->
-                <div class="bg-white p-6 rounded-2xl shadow-lg text-center flex flex-col items-center justify-center space-y-3 transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:bg-gray-100 group">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-languages text-cyan-500 transition-colors duration-300 group-hover:text-gray-900"><path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/></svg>
-                    <h3 class="text-xl font-semibold text-gray-900">English & Kannada</h3>
-                </div>
-            </div>
-        </section>
-
-        <!-- Projects Section -->
-        <section id="projects" class="container mx-auto px-6 md:px-12 py-16 fade-in-section">
-            <h2 class="text-4xl md:text-5xl font-bold text-center section-title mx-auto pb-4">My Projects</h2>
-            <div class="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Project Card 1: Notes Sharing Website -->
-                <div class="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
-                    <img src="https://placehold.co/600x400/F8FAFC/1F2937?text=Notes+Website" alt="Notes Sharing Website" class="w-full h-48 object-cover">
-                    <div class="p-6 flex flex-col flex-grow">
-                        <h3 class="text-2xl font-semibold text-gray-900 mb-2">Notes Sharing Website</h3>
-                        <p class="text-gray-700 flex-grow">A platform for sharing and accessing academic resources and notes, built on WordPress.</p>
-                        <a href="https://gfgcrmd.wordpress.com/" target="_blank" class="mt-4 inline-block text-cyan-500 font-medium hover:underline transition-colors">
-                            View Project →
-                        </a>
-                    </div>
-                </div>
-                <!-- Project Card 2: Hotel GMB Profile -->
-                <div class="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
-                    <img src="https://placehold.co/600x400/F8FAFC/1F2937?text=Hotel+Profile" alt="Hotel GMB Profile" class="w-full h-48 object-cover">
-                    <div class="p-6 flex flex-col flex-grow">
-                        <h3 class="text-2xl font-semibold text-gray-900 mb-2">Hotel Tirumala GMB Profile</h3>
-                        <p class="text-gray-700 flex-grow">Managed and optimized the Google My Business profile to improve online visibility and customer engagement.</p>
-                        <a href="https://share.google/htrhpWbTCsEPCmuLZ" target="_blank" class="mt-4 inline-block text-cyan-500 font-medium hover:underline transition-colors">
-                            View Profile →
-                        </a>
-                    </div>
-                </div>
-                <!-- Project Card 3: Personal Blog -->
-                <div class="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
-                    <img src="https://placehold.co/600x400/F8FAFC/1F2937?text=Personal+Blog" alt="Personal Blog" class="w-full h-48 object-cover">
-                    <div class="p-6 flex flex-col flex-grow">
-                        <h3 class="text-2xl font-semibold text-gray-900 mb-2">My Personal Blog</h3>
-                        <p class="text-gray-700 flex-grow">A blog where I share my thoughts, experiences, and learnings on various topics.</p>
-                        <a href="https://tippannabangi.blogspot.com/" target="_blank" class="mt-4 inline-block text-cyan-500 font-medium hover:underline transition-colors">
-                            Read Blog →
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Work Experience & Education Section -->
-        <section id="experience" class="container mx-auto px-6 md:px-12 fade-in-section">
-            <h2 class="text-4xl md:text-5xl font-bold text-center section-title mx-auto pb-4">Work & Education</h2>
-            <div class="mt-12 space-y-12 max-w-4xl mx-auto">
-                <!-- Experience Item -->
-                <div class="relative pl-8 sm:pl-32 group">
-                    <div class="absolute left-0 sm:left-16 top-0 bottom-0 w-1 bg-gray-300 rounded-full hidden sm:block"></div>
-                    <div class="relative z-10 flex flex-col sm:flex-row items-start sm:items-center">
-                        <div class="bg-cyan-500 text-white rounded-full w-24 sm:w-32 py-2 text-center text-sm font-semibold flex-shrink-0 mb-4 sm:mb-0 transition-transform duration-300 group-hover:scale-110">
-                            ~3 Years
-                        </div>
-                        <div class="sm:ml-8 bg-white p-6 rounded-2xl shadow-lg w-full transition-all duration-300 transform group-hover:-translate-y-1 group-hover:shadow-2xl">
-                            <h3 class="text-2xl font-bold text-gray-900">Customer Associate</h3>
-                            <p class="text-gray-500">SquadStack | Remote</p>
-                            <ul class="mt-2 text-gray-700 list-disc list-inside space-y-1">
-                                <li>Interacted with leads and customers to deliver product insights and support.</li>
-                                <li>Maintained high communication standards to ensure customer satisfaction.</li>
-                                <li>Focused on data accuracy and performance metrics to meet team goals.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- Trainee Item -->
-                <div class="relative pl-8 sm:pl-32 group">
-                    <div class="absolute left-0 sm:left-16 top-0 bottom-0 w-1 bg-gray-300 rounded-full hidden sm:block"></div>
-                    <div class="relative z-10 flex flex-col sm:flex-row items-start sm:items-center">
-                        <div class="bg-cyan-500 text-white rounded-full w-24 sm:w-32 py-2 text-center text-sm font-semibold flex-shrink-0 mb-4 sm:mb-0 transition-transform duration-300 group-hover:scale-110">
-                            Trainee
-                        </div>
-                        <div class="sm:ml-8 bg-white p-6 rounded-2xl shadow-lg w-full transition-all duration-300 transform group-hover:-translate-y-1 group-hover:shadow-2xl">
-                            <h3 class="text-2xl font-bold text-gray-900">Trainee, Deshpande Skilling</h3>
-                            <p class="text-gray-500">Hubli, Karnataka</p>
-                            <ul class="mt-2 text-gray-700 list-disc list-inside space-y-1">
-                                <li>Developing skills in business communication, reasoning, aptitude, and technology.</li>
-                                <li>Participating in real-world projects and industry-oriented training.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- Education Item -->
-                <div class="relative pl-8 sm:pl-32 group">
-                    <div class="absolute left-0 sm:left-16 top-0 bottom-0 w-1 bg-gray-300 rounded-full hidden sm:block"></div>
-                    <div class="relative z-10 flex flex-col sm:flex-row items-start sm:items-center">
-                        <div class="bg-cyan-500 text-white rounded-full w-24 sm:w-32 py-2 text-center text-sm font-semibold flex-shrink-0 mb-4 sm:mb-0 transition-transform duration-300 group-hover:scale-110">
-                            Education
-                        </div>
-                        <div class="sm:ml-8 bg-white p-6 rounded-2xl shadow-lg w-full transition-all duration-300 transform group-hover:-translate-y-1 group-hover:shadow-2xl">
-                            <h3 class="text-2xl font-bold text-gray-900">Bachelor of Arts (B.A.) in Economics</h3>
-                            <p class="text-gray-500">Rani Channamma University, Belagavi | Completed</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Certifications Section -->
-        <section id="certifications" class="container mx-auto px-6 md:px-12 py-16 fade-in-section">
-            <h2 class="text-4xl md:text-5xl font-bold text-center section-title mx-auto pb-4">Certifications</h2>
-            <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                <!-- Certification Card 1 -->
-                <a href="https://www.coursera.org/account/accomplishments/verify/Z6NKQVJTXXAX?utm_source%3Dandroid%26utm_medium%3Dcertificate%26utm_content%3Dcert_image%26utm_campaign%3Dsharing_cta%26utm_product%3Dcourse" target="_blank" class="block p-8 bg-white rounded-2xl shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
-                    <div class="flex flex-col h-full">
-                        <h3 class="text-xl font-semibold text-gray-900">Introduction to Digital Marketing</h3>
-                        <p class="text-gray-500 mt-2">Issued by: <span class="font-medium text-cyan-500">Meta</span></p>
-                        <p class="text-gray-700 mt-4 flex-grow">Covers the fundamentals of digital marketing, social media marketing, and online advertising strategies.</p>
-                        <p class="mt-4 text-cyan-500 font-medium">
-                            View Certificate →
-                        </p>
-                    </div>
-                </a>
-                <!-- Certification Card 2 -->
-                <a href="https://www.edubridgeindia.com/certificate-detail?enrollment_number=EBEON0225986007" target="_blank" class="block p-8 bg-white rounded-2xl shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
-                    <div class="flex flex-col h-full">
-                        <h3 class="text-xl font-semibold text-gray-900">Data Entry Operator</h3>
-                        <p class="text-gray-500 mt-2">Issued by: <span class="font-medium text-cyan-500">EduBridge</span></p>
-                        <p class="text-gray-700 mt-4 flex-grow">Proficiency in data entry techniques, accuracy, speed, and use of relevant software tools.</p>
-                        <p class="mt-4 text-cyan-500 font-medium">
-                            View Certificate →
-                        </p>
-                    </div>
-                </a>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="container mx-auto px-6 md:px-12 py-16 bg-white rounded-3xl shadow-xl fade-in-section">
-            <h2 class="text-4xl md:text-5xl font-bold text-center section-title mx-auto pb-4">Get In Touch</h2>
-            <div class="mt-12 max-w-3xl mx-auto grid md:grid-cols-2 gap-8 md:gap-12">
-                <div>
-                    <h3 class="text-2xl font-semibold text-gray-900">Contact Details</h3>
-                    <ul class="mt-6 space-y-4 text-lg">
-                        <li class="flex items-start space-x-4">
-                            <svg class="w-8 h-8 text-cyan-500 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.103 0-2 .897-2 2v12c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2zm0 2v.511l-8 6.009-8-6.009V6h16zM4 18V9.754l7.633 5.725c.19.143.431.218.672.218s.482-.075.672-.218L20 9.754V18H4z"/></svg>
-                            <span>Tippannahbangi@gmail.com</span>
-                        </li>
-                        <li class="flex items-start space-x-4">
-                            <svg class="w-8 h-8 text-cyan-500 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24c1.12.37 2.33.57 3.57.57c.55 0 1 .45 1 1V20c0 .55-.45 1-1 1c-9.39 0-17-7.61-17-17c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1c0 1.25.2 2.45.57 3.57c.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-                            <span>+91 7795610812</span>
-                        </li>
-                    </ul>
-                    <!-- LinkedIn Badge -->
-                    <div class="mt-8 flex justify-start">
-                        <div class="badge-base LI-profile-badge" data-locale="en_US" data-size="medium" data-theme="light" data-type="VERTICAL" data-vanity="tippanna-bangi-2b1a77328" data-version="v1"><a class="badge-base__link LI-simple-link" href="https://in.linkedin.com/in/tippanna-bangi-2b1a77328?trk=profile-badge">Tippanna Bangi</a></div>
-                    </div>
-                </div>
-                <div>
-                    <h3 class="text-2xl font-semibold text-gray-900 mb-6">Send a Message</h3>
-                    <!-- Tally form embed code - iframe height updated for better spacing -->
-                    <iframe data-tally-src="https://tally.so/embed/w26oMb?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="300" frameborder="0" marginheight="0" marginwidth="0" title="GET IN TOUCH"></iframe>
-                    <script>var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}</script>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-gray-100 text-gray-500 p-8 text-center border-t border-gray-200">
-        <p>© 2025 Tippanna Bangi. All rights reserved.</p>
-        <p class="mt-2">Developed with ❤️ & Tippanna</p>
-    </footer>
-
-    <!-- LinkedIn Badge Script -->
-    <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
-
-    <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const href = this.getAttribute('href');
-                if (href.length > 1) {
-                    e.preventDefault();
-                    const targetElement = document.querySelector(href);
-                    if (targetElement) {
-                        targetElement.scrollIntoView({
-                            behavior: 'smooth'
-                        });
-                    }
-                }
-            });
-        });
-
-        // Mobile menu toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        // Close mobile menu when a link is clicked
-        mobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-            });
-        });
-
-        // Add a class to the header on scroll
-        window.addEventListener('scroll', () => {
-            const header = document.getElementById('main-header');
-            if (window.scrollY > 50) {
-                header.classList.add('bg-opacity-100');
-                header.classList.remove('bg-opacity-80');
-            } else {
-                header.classList.add('bg-opacity-80');
-                header.classList.remove('bg-opacity-100');
+// Portfolio Data
+const portfolioData = {
+    about: {
+        title: "About Me",
+        content: [
+            "I am a tech-savvy graduate with a passion for technology, automation, and continuous learning. With nearly three years of experience as a Customer Associate at SquadStack, I have honed my skills in customer interaction, communication, and data handling.",
+            "I am currently a trainee at Deshpande Skilling, where I'm further developing my technical and professional skills in areas like business communication, reasoning, aptitude, and technology. I am recognized for my adaptability, strong interpersonal skills, and a proactive approach to problem-solving."
+        ]
+    },
+    skills: {
+        title: "Core Skills",
+        items: [
+            "Customer Orientation",
+            "Communication Skills",
+            "Problem Solving",
+            "Result-Oriented",
+            "Python & SQL",
+            "AI & Automation",
+            "MS Office & Google Workspace",
+            "English & Kannada"
+        ]
+    },
+    projects: {
+        title: "My Projects",
+        list: [
+            {
+                name: "Notes Sharing Website",
+                description: "A platform for sharing and accessing academic resources and notes, built on WordPress.",
+                url: "https://gfgcrmd.wordpress.com/"
+            },
+            {
+                name: "Hotel Tirumala GMB Profile",
+                description: "Managed and optimized the Google My Business profile to improve online visibility and customer engagement.",
+                url: "https://share.google/htrhpWbTCsEPCmuLZ"
+            },
+            {
+                name: "My Personal Blog",
+                description: "A blog where I share my thoughts, experiences, and learnings on various topics.",
+                url: "https://tippannabangi.blogspot.com/"
             }
-        });
+        ]
+    },
+    contact: {
+        title: "Contact Info",
+        email: "Tippannahbangi@gmail.com",
+        phone: "+91 7795610812",
+        linkedin: "https://in.linkedin.com/in/tippanna-bangi-2b1a77328?trk=profile-badge",
+        github: "Your GitHub Profile URL Here"
+    },
+    easterEgg: {
+        title: "Secret Fun Facts!",
+        content: [
+            "I am a huge fan of classic video games, especially old-school RPGs.",
+            "My favorite programming language is Python because of its readability and simplicity.",
+            "I love learning about new technologies and finding ways to automate daily tasks.",
+        ]
+    }
+};
 
-        // Fade-in sections on scroll using Intersection Observer
-        const fadeInSections = document.querySelectorAll('.fade-in-section');
-        const options = {
-            threshold: 0.2
-        };
+// Component Definitions
 
-        const observer = new IntersectionObserver(function(entries, observer) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                    observer.unobserve(entry.target);
+const BootScreen = ({ onBootComplete }) => {
+    useEffect(() => {
+        setTimeout(() => {
+            onBootComplete();
+        }, 5000); // 5 seconds
+    }, [onBootComplete]);
+    return (
+        <div className="bootContainer">
+            <div className="bootText">
+                <p>Loading TippannaOS v1.0...</p>
+                <p>Initializing core components...</p>
+                <p>Establishing connection to the matrix...</p>
+                <p>Access Granted. Welcome, User.</p>
+                <p className="cursor">_</p>
+            </div>
+        </div>
+    );
+};
+
+const Icon = ({ name, icon, onClick }) => {
+    const iconPath = `https://i.ibb.co/${icon}.png`;
+    const getIBB = {
+        'about': 'kX7H8Yv',
+        'projects': '8w2Vj6s',
+        'skills': 'rT6R9Xb',
+        'contact': 'G2D7B4M',
+        'resume': 'Y4P7T2B',
+        'terminal': 'W3D9F8L'
+    };
+    return (
+        <div className="icon" onClick={onClick}>
+            <img src={`https://i.ibb.co/${getIBB[icon]}.png`} alt={`${name} icon`} className="iconImage" />
+            <span className="iconName">{name}</span>
+        </div>
+    );
+};
+
+const Window = ({ id, title, children, onClose, onMinimize, onMaximize, isActive, zIndex, initialPosition, onDrag }) => {
+    const [isMaximized, setIsMaximized] = useState(false);
+    const [position, setPosition] = useState(initialPosition || { x: 0, y: 0 });
+    const nodeRef = useRef(null);
+
+    const handleMaximizeClick = () => {
+        setIsMaximized(!isMaximized);
+        onMaximize();
+    };
+
+    return (
+        <DraggableCore
+            handle=".windowHeader"
+            onDrag={onDrag}
+            onStop={(e, data) => setPosition({ x: data.x, y: data.y })}
+            disabled={isMaximized}
+        >
+            <div
+                ref={nodeRef}
+                className={`window ${isActive ? 'active' : ''} ${isMaximized ? 'maximized' : ''}`}
+                style={{
+                    zIndex,
+                    transform: isMaximized ? 'none' : `translate(${position.x}px, ${position.y}px)`,
+                    display: 'flex'
+                }}
+            >
+                <div className="windowHeader">
+                    <span className="windowTitle">{title}</span>
+                    <div className="windowControls">
+                        <button className="minimizeBtn" onClick={onMinimize}>-</button>
+                        <button className="maximizeBtn" onClick={handleMaximizeClick}>&#9633;</button>
+                        <button className="closeBtn" onClick={onClose}>×</button>
+                    </div>
+                </div>
+                <div className="windowContent">
+                    {children}
+                </div>
+            </div>
+        </DraggableCore>
+    );
+};
+
+
+const Taskbar = ({ openWindows, onTaskbarClick, onToggleTheme, onOpenApp }) => {
+    const [currentTime, setCurrentTime] = useState(new Date());
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setCurrentTime(new Date());
+        }, 1000);
+        return () => clearInterval(timer);
+    }, []);
+    const formatTime = (date) => {
+        const hours = date.getHours();
+        const minutes = date.getMinutes();
+        const ampm = hours >= 12 ? 'PM' : 'AM';
+        const formattedHours = hours % 12 === 0 ? 12 : hours % 12;
+        const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+        return `${formattedHours}:${formattedMinutes} ${ampm}`;
+    };
+    return (
+        <div className="taskbar">
+            <div className="startMenu">
+                <span className="startButton" onClick={() => onOpenApp('terminal')}>Start</span>
+            </div>
+            <div className="windowList">
+                {Object.values(openWindows).map(window => (
+                    <div
+                        key={window.id}
+                        className={`taskbarItem ${window.isMinimized ? 'minimized' : ''}`}
+                        onClick={() => onTaskbarClick(window.id)}
+                    >
+                        {window.title}
+                    </div>
+                ))}
+            </div>
+            <div className="systemTray">
+                <button onClick={onToggleTheme} className="themeToggle">Theme</button>
+                <span className="time">{formatTime(currentTime)}</span>
+            </div>
+        </div>
+    );
+};
+
+const Terminal = () => {
+    const [history, setHistory] = useState([
+        "Welcome to TippannaOS Command Line.",
+        "Type 'help' to see a list of commands."
+    ]);
+    const [input, setInput] = useState("");
+    const terminalRef = useRef(null);
+    const commands = {
+        help: () => [
+            "Available commands:",
+            "  about      - Display 'About Me' information.",
+            "  projects   - List my projects.",
+            "  skills     - Show my core skills.",
+            "  contact    - Show contact information.",
+            "  secret     - Find a hidden fun fact.",
+            "  clear      - Clear the console.",
+        ],
+        about: () => portfolioData.about.content,
+        projects: () => portfolioData.projects.list.map(p => `${p.name}: ${p.description}`),
+        skills: () => portfolioData.skills.items,
+        contact: () => [
+            `Email: ${portfolioData.contact.email}`,
+            `Phone: ${portfolioData.contact.phone}`,
+            `LinkedIn: ${portfolioData.contact.linkedin}`
+        ],
+        secret: () => portfolioData.easterEgg.content,
+        clear: () => { setHistory([]); return []; },
+        default: (cmd) => [`Command not found: ${cmd}. Type 'help' for a list of commands.`]
+    };
+
+    const handleCommand = (e) => {
+        if (e.key === 'Enter') {
+            const cmd = input.trim().toLowerCase();
+            const output = commands[cmd] ? commands[cmd]() : commands.default(cmd);
+            setHistory(prevHistory => [...prevHistory, `> ${input}`, ...output]);
+            setInput("");
+        }
+    };
+    useEffect(() => {
+        if (terminalRef.current) {
+            terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
+        }
+    }, [history]);
+
+    return (
+        <div className="terminalContainer">
+            <pre ref={terminalRef} className="output">
+                {history.map((line, index) => <span key={index}>{line}<br /></span>)}
+            </pre>
+            <div className="inputLine">
+                <span>></span>
+                <input
+                    type="text"
+                    className="input"
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    onKeyDown={handleCommand}
+                    autoFocus
+                />
+            </div>
+        </div>
+    );
+};
+
+const App = () => {
+    const [isBooting, setIsBooting] = useState(true);
+    const [theme, setTheme] = useState('dark');
+    const [openWindows, setOpenWindows] = useState({});
+    const [activeWindow, setActiveWindow] = useState(null);
+    const [zIndexCounter, setZIndexCounter] = useState(1);
+
+    const openWindow = useCallback((id, title, content) => {
+        setOpenWindows(prevWindows => {
+            const newZIndex = zIndexCounter + 1;
+            setZIndexCounter(newZIndex);
+            if (prevWindows[id]) {
+                if (prevWindows[id].isMinimized) {
+                    return { ...prevWindows, [id]: { ...prevWindows[id], isMinimized: false, zIndex: newZIndex } };
                 }
-            });
-        }, options);
-
-        fadeInSections.forEach(section => {
-            observer.observe(section);
+                return { ...prevWindows, [id]: { ...prevWindows[id], zIndex: newZIndex } };
+            }
+            return {
+                ...prevWindows,
+                [id]: {
+                    id,
+                    title,
+                    content,
+                    isMinimized: false,
+                    isMaximized: false,
+                    initialPosition: {
+                        x: Math.random() * 200 + 50,
+                        y: Math.random() * 100 + 50
+                    },
+                    zIndex: newZIndex
+                }
+            };
         });
-    </script>
+        setActiveWindow(id);
+    }, [zIndexCounter]);
+
+    const closeWindow = useCallback((id) => {
+        setOpenWindows(prevWindows => {
+            const newWindows = { ...prevWindows };
+            delete newWindows[id];
+            return newWindows;
+        });
+        setActiveWindow(null);
+    }, []);
+
+    const minimizeWindow = useCallback((id) => {
+        setOpenWindows(prevWindows => ({ ...prevWindows, [id]: { ...prevWindows[id], isMinimized: true } }));
+    }, []);
+
+    const maximizeWindow = useCallback((id) => {
+        setOpenWindows(prevWindows => ({ ...prevWindows, [id]: { ...prevWindows[id], isMaximized: !prevWindows[id].isMaximized } }));
+    }, []);
+
+    const focusWindow = useCallback((id) => {
+        if (!openWindows[id]) return;
+        setZIndexCounter(prev => {
+            setOpenWindows(prevWindows => ({
+                ...prevWindows,
+                [id]: { ...prevWindows[id], zIndex: prev + 1, isMinimized: false }
+            }));
+            setActiveWindow(id);
+            return prev + 1;
+        });
+    }, [openWindows]);
+
+    const handleIconClick = (app) => {
+        if (app === 'about') openWindow('about', 'About Me', <div>{portfolioData.about.content.map((p, i) => <p key={i} className="windowText">{p}</p>)}</div>);
+        if (app === 'projects') openWindow('projects', 'Projects', <div><h3 className="windowSubTitle">My Projects</h3>{portfolioData.projects.list.map((p, i) => (<div key={i} className="projectItem"><h4>{p.name}</h4><p>{p.description}</p><a href={p.url} target="_blank" rel="noopener noreferrer">View Project →</a></div>))}</div>);
+        if (app === 'skills') openWindow('skills', 'Skills', <div><h3 className="windowSubTitle">Core Skills</h3><ul>{portfolioData.skills.items.map((s, i) => <li key={i}>{s}</li>)}</ul></div>);
+        if (app === 'contact') openWindow('contact', 'Contact', <div><h3 className="windowSubTitle">Get In Touch</h3><p>Email: {portfolioData.contact.email}</p><p>Phone: {portfolioData.contact.phone}</p><p>LinkedIn: <a href={portfolioData.contact.linkedin} target="_blank" rel="noopener noreferrer">My LinkedIn</a></p></div>);
+        if (app === 'terminal') openWindow('terminal', 'Terminal', <Terminal />);
+        if (app === 'resume') { alert("Resume link will be here!"); }
+    };
+
+    const handleToggleTheme = () => {
+        setTheme(prevTheme => (prevTheme === 'dark' ? 'light' : 'dark'));
+    };
+
+    return (
+        <React.Fragment>
+            {isBooting ? (
+                <BootScreen onBootComplete={() => setIsBooting(false)} />
+            ) : (
+                <div className={`desktop ${theme === 'dark' ? 'darkTheme' : 'lightTheme'}`}>
+                    <div className="iconsContainer">
+                        <Icon name="About Me" icon="about" onClick={() => handleIconClick('about')} />
+                        <Icon name="Projects" icon="projects" onClick={() => handleIconClick('projects')} />
+                        <Icon name="Skills" icon="skills" onClick={() => handleIconClick('skills')} />
+                        <Icon name="Contact" icon="contact" onClick={() => handleIconClick('contact')} />
+                        <Icon name="Resume.pdf" icon="resume" onClick={() => handleIconClick('resume')} />
+                        <Icon name="Terminal" icon="terminal" onClick={() => handleIconClick('terminal')} />
+                    </div>
+                    {Object.values(openWindows).map((windowProps) => (
+                        <Window
+                            key={windowProps.id}
+                            {...windowProps}
+                            onClose={() => closeWindow(windowProps.id)}
+                            onMinimize={() => minimizeWindow(windowProps.id)}
+                            onMaximize={() => maximizeWindow(windowProps.id)}
+                            isActive={activeWindow === windowProps.id}
+                            onDrag={() => focusWindow(windowProps.id)}
+                            zIndex={windowProps.zIndex}
+                        >
+                            {windowProps.content}
+                        </Window>
+                    ))}
+                    <Taskbar
+                        openWindows={openWindows}
+                        onTaskbarClick={focusWindow}
+                        onToggleTheme={handleToggleTheme}
+                        onOpenApp={handleIconClick}
+                    />
+                </div>
+            )}
+        </React.Fragment>
+    );
+};
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+
+</script>
 </body>
 </html>
-
